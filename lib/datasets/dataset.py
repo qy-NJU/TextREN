@@ -88,17 +88,6 @@ class LmdbDataset(data.Dataset):
     buf.seek(0)
     try:
       img = Image.open(buf).convert('RGB')
-      #img = exposure.rescale_intensity(np.asarray(img))
-      img = np.asarray(img)
-      img0 = exposure.equalize_hist(img[:, :, 0])
-      img1 = exposure.equalize_hist(img[:, :, 1])
-      img2 = exposure.equalize_hist(img[:, :, 2])
-      img = np.stack((img0, img1, img2), axis=2)
-      img = np.uint8(img * 255)
-      img = Image.fromarray(img)
-      img = self.homo_filter.rgb_filter(img)
-      # img = Image.open(buf).convert('L')
-      # img = img.convert('RGB')
     except IOError:
       print('Corrupted image for %d' % index)
       return self[index + 1]
