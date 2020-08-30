@@ -1,0 +1,22 @@
+CUDA_VISIBLE_DEVICES=0,1 python3.6 ../main.py \
+    --synthetic_train_data_dir Path_to_train_dataset \
+    --test_data_dir Path_to_test_dataset \
+    --batch_size 1024 \
+    --workers 8 \
+    --height 64 \
+    --width 256 \
+    --voc_type LOWERCASE \
+    --arch ResNet_ASTER \
+    --with_lstm \
+    --logs_dir logs/test \
+    --real_logs_dir ../ \
+    --max_len 100 \
+    --evaluate \
+    --STN_ON \
+    --beam_width 5 \
+    --tps_inputsize 32 64 \
+    --tps_outputsize 32 112 \
+    --tps_margins 0.05 0.05 \
+    --stn_activation none \
+    --num_control_points 20 \
+    --resume ./logs/tra_stn_aster2/model_best.pth.tar
